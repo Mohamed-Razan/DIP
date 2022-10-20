@@ -24,6 +24,8 @@ int main(int argc, char* argv[]) {
     int b = 234;*/
     int a = atoi(argv[2]); //get from command line
     int b = atoi(argv[3]);
+    int c = 5;
+    int d = 250;
     //int the command line - Project1 low_contrast_girl.jpg 103 234 - pass like this
     int x;
     int out;
@@ -31,12 +33,12 @@ int main(int argc, char* argv[]) {
     for (int i = 0; i < gray.rows; i++) {
         for (int j = 0; j < gray.cols; j++) {
             x = (int)gray.at<uchar>(i, j);
-            if (0 <= x && x <= a)
-                out = int((5 / a) * x);
+            if (x >= 0 && x <= a)
+                out = int((c / a) * x);
             else if (a < x && x <= b)
-                out = int(((250 - 5) / (b - a)) * (x - a) + 5);
-            else if (b < x && x <= 255)
-                out = int(((255 - 250) / (255 - b)) * (x - b) + 250);
+                out = int(((d - c) / (b - a)) * (x - a) + 5);
+            else if (x > b && x <= 255)
+                out = int(((255 - d) / (255 - b)) * (x - b) + 250);
 
             //convert the int value to uchar and apply it to the high contrast image
             constrastImg.at<uchar>(i, j) = uchar(out);
